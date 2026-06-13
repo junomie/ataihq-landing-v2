@@ -1,0 +1,10 @@
+# Claude Code / gstack tooling — local only, never ship
+.claude/
+.gstack/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Editor
+*.swp
