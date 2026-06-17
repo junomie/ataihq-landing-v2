@@ -830,6 +830,18 @@ body::after {
   .stats__grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
+/* Prevent stat numbers wrapping at tablet and above (mobile handled separately). */
+@media (min-width: 769px) {
+  .stat__num { white-space: nowrap; }
+}
+
+/* At 4-column layout (>960px) the columns are narrow enough that £19,000 wraps
+   at the base font-size. Scale down the vw and cap the max so every stat fits
+   on a single line without horizontal overflow. */
+@media (min-width: 961px) {
+  .stat__num { font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
+}
+
 /* ============================================================
    CUSTOM CURSOR (desktop pointer devices only)
    ============================================================ */
