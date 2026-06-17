@@ -340,7 +340,10 @@ body::after {
   gap: 2rem;
   padding-block: 3.2rem;
 }
-.stat { text-align: left; }
+.stat {
+  text-align: left;
+  min-width: 0; /* allow grid item to shrink below content size */
+}
 .stat__num {
   display: block;
   font-family: var(--font-display);
@@ -351,6 +354,7 @@ body::after {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  overflow-wrap: anywhere; /* never let long numbers push past the container */
 }
 .stat__unit {
   font-size: 0.4em;
@@ -377,6 +381,7 @@ body::after {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-dim);
+  overflow-wrap: anywhere; /* wrap long source words instead of overflowing */
 }
 
 /* ============================================================
@@ -817,6 +822,12 @@ body::after {
   .nav__burger.is-open span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
   .hero__scrollcue { display: none; }
+}
+
+/* Stack the four stat cards one per row below 768px — two columns of large
+   gradient numbers were forcing content wider than the viewport on phones. */
+@media (max-width: 767.98px) {
+  .stats__grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 /* ============================================================
