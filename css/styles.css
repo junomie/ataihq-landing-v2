@@ -442,8 +442,7 @@ body::after {
           mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 48%, transparent 96%);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
 }
-.media-frame:hover img,
-.media-frame:hover video {
+.media-frame:hover img {
   transform: scale(1.05);
   filter: brightness(1.2) saturate(1.12);
 }
@@ -952,6 +951,20 @@ body::after {
   pointer-events: none;
   z-index: 3;
   background: radial-gradient(ellipse 78% 72% at 50% 50%, transparent 44%, var(--bg) 88%);
+}
+
+/* Wrapper div around <video> so the scale transform is applied to a normal
+   div element rather than to the GPU-composited video surface directly.
+   In Chromium, transform on <video> in a preserve-3d context changes the
+   layout box but not the actual video pixels — wrapping fixes this. */
+.media-frame__video-wrap {
+  position: relative; /* keeps .media-veil positioned against the wrap */
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease;
+}
+.media-frame:hover .media-frame__video-wrap {
+  transform: scale(1.05);
+  filter: brightness(1.2) saturate(1.12);
 }
 
 /* ============================================================
